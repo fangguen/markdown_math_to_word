@@ -1,0 +1,368 @@
+/* 全局样式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: #f8f9fa;
+  line-height: 1.6;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+}
+
+/* 头部样式 */
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.header p {
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+
+/* 主容器 */
+.container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  min-height: 0;
+}
+
+/* 面板通用样式 */
+.editor-panel,
+.preview-panel {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 面板头部 */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.panel-header h3 {
+  font-size: 1.1rem;
+  color: #495057;
+  font-weight: 600;
+}
+
+.char-count {
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+/* 编辑器样式 */
+.editor {
+  flex: 1;
+  border: none;
+  padding: 1.5rem;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+  background: #ffffff;
+  color: #333;
+}
+
+.editor:focus {
+  background: #fefefe;
+}
+
+/* 复制按钮样式 */
+.copy-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.copy-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.copy-button:active {
+  transform: translateY(0);
+}
+
+/* 预览区域样式 - 模拟Word文档效果 */
+.preview {
+  flex: 1;
+  padding: 2rem;
+  background: #ffffff;
+  overflow-y: auto;
+  font-family: 'Times New Roman', serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  
+  /* Word文档样式 */
+  max-width: none;
+  border: none;
+}
+
+/* Markdown内容样式 */
+.preview h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1.5rem 0 1rem 0;
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.5rem;
+}
+
+.preview h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1.2rem 0 0.8rem 0;
+  color: #34495e;
+}
+
+.preview h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 1rem 0 0.6rem 0;
+  color: #34495e;
+}
+
+.preview h4,
+.preview h5,
+.preview h6 {
+  font-weight: bold;
+  margin: 0.8rem 0 0.4rem 0;
+  color: #34495e;
+}
+
+.preview p {
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+
+/* 强调文本 */
+.preview strong {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.preview em {
+  font-style: italic;
+}
+
+/* 列表样式 */
+.preview ul,
+.preview ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.preview li {
+  margin-bottom: 0.3rem;
+}
+
+/* 代码样式 - Word兼容优化 */
+.preview code {
+  background-color: #f0f0f0;
+  padding: 2px 4px;
+  font-family: 'Courier New', monospace; /* Word兼容字体 */
+  font-size: 10pt; /* 使用pt单位，Word更兼容 */
+  color: #000000;
+  border: 1px solid #cccccc;
+  /* 添加Word兼容的样式 */
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  margin: 0 2px;
+}
+
+.preview pre {
+  background-color: #f0f0f0;
+  border: 1px solid #cccccc;
+  padding: 8px;
+  margin: 10pt 0;
+  font-family: 'Courier New', monospace; /* Word兼容字体 */
+  font-size: 10pt; /* 使用pt单位 */
+  line-height: 1.2;
+  color: #000000;
+  /* Word兼容优化 */
+  page-break-inside: avoid;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  /* 确保在Word中显示 */
+  display: block;
+  clear: both;
+}
+
+.preview pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  /* 确保行内代码在Word中正确显示 */
+  display: inline;
+}
+
+/* 引用样式 */
+.preview blockquote {
+  border-left: 4px solid #3498db;
+  margin: 1rem 0;
+  padding: 0.5rem 0 0.5rem 1rem;
+  background-color: #f8f9fa;
+  font-style: italic;
+  color: #555;
+}
+
+/* 分隔线 */
+.preview hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, #3498db, #e74c3c);
+  margin: 2rem 0;
+  border-radius: 1px;
+}
+
+/* 表格样式已在组件中定义 */
+
+/* 链接样式 */
+.preview a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.preview a:hover {
+  text-decoration: underline;
+}
+
+/* 数学公式图片样式优化 */
+.preview .math-image {
+  /* 基础样式 */
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 行内数学公式图片优化 */
+.preview .math-image:not([style*="display: block"]) {
+  /* 行内公式特殊优化 */
+  margin: 0 0.05em;
+  padding: 0;
+  border-radius: 2px;
+  /* 确保不影响文本行高 */
+  line-height: inherit;
+}
+
+/* 块级数学公式图片优化 */
+.preview .math-image[style*="display: block"] {
+  /* 块级公式居中显示 */
+  margin: 1.2em auto;
+  padding: 0.5em;
+  background: rgba(248, 249, 250, 0.5);
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+/* 防止数学图片在复制时出现问题 */
+.preview .math-image {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* 数学公式区域的特殊样式 */
+.preview p:has(.math-image),
+.preview li:has(.math-image) {
+  line-height: 1.6;
+}
+
+/* 响应式设计 - 小屏幕上的数学公式 */
+@media (max-width: 768px) {
+  .preview .math-image[style*="display: block"] {
+    max-width: 95%;
+    margin: 0.8em auto;
+  }
+
+  .preview .math-image:not([style*="display: block"]) {
+    max-height: 1em;
+    transform: translateY(0.02em);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  
+  .header {
+    padding: 1rem;
+  }
+  
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .preview {
+    padding: 1rem;
+  }
+}
+
+/* 滚动条样式 */
+.preview::-webkit-scrollbar,
+.editor::-webkit-scrollbar {
+  width: 8px;
+}
+
+.preview::-webkit-scrollbar-track,
+.editor::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.preview::-webkit-scrollbar-thumb,
+.editor::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.preview::-webkit-scrollbar-thumb:hover,
+.editor::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
